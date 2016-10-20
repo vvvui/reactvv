@@ -17,7 +17,8 @@ const config = {
     output: {
         path: buildPath, // Path of output file
         publicPath: "", // static url
-        filename: "[name].[chunkhash].js", // Name of output file
+        // filename: "[name].[chunkhash].js", // Name of output file
+        filename: "[name].js", // Name of output file
     },
     plugins: [
         new webpack.DefinePlugin({
