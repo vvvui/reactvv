@@ -1,0 +1,153 @@
+@s: 375rem;
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-size: 375px;
+    background-color: #eeeeee;
+    font-family: Helvetica,STHeiti,Droid Sans Fallback;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 14/@s;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.clearFix {
+    *zoom: 1;  /* for IE 6 7 */
+}
+
+.clearFix:before {
+    content : " ";
+    display : block;
+}
+
+.clearFix:after {
+    clear   : both;
+    content : " ";
+    display : block;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #eeeeee;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.loadingImg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50/@s 0 0 -50/@s;
+    width: 100/@s;
+    height: 100/@s;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url(images/ing.gif);
+}
+
+.iFile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.closeIcon {
+    position: relative;
+    display: inline-block;
+    width: 25/@s;
+    height: 25/@s;
+    overflow: hidden;
+}
+.closeIcon:hover::before, .closeIcon:hover::after {
+    background: #1ebcc5;
+}
+.closeIcon::before, .closeIcon::after {
+    content: '';
+    position: absolute;
+    height: 2/@s;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1/@s;
+    background: #000;
+}
+.closeIcon::before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.closeIcon::after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.closeIcon.big {
+    -webkit-transform: scale(3);
+    -moz-transform: scale(3);
+    -ms-transform: scale(3);
+    -o-transform: scale(3);
+    transform: scale(3);
+}
+.closeIcon.hairline::before, .closeIcon.hairline::after {
+    height: 1/@s;
+}
+.closeIcon.thick::before, .closeIcon.thick::after {
+    height: 4/@s;
+    margin-top: -2/@s;
+}
+.closeIcon.black::before, .closeIcon.black::after {
+    height: 8/@s;
+    margin-top: -4/@s;
+}
+.closeIcon.heavy::before, .closeIcon.heavy::after {
+    height: 12/@s;
+    margin-top: -6/@s;
+}
+.closeIcon.pointy::Before, .closeIcon.pointy::after {
+    width: 200%;
+    left: -50%;
+}
+.closeIcon.rounded::before, .closeIcon.rounded::after {
+    border-radius: 5/@s;
+}
+.closeIcon.blades::before, .closeIcon.blades::after {
+    border-radius: 5/@s 0;
+}
+.closeIcon.warp::before, .closeIcon.warp::after {
+    border-radius: 120% 0;
+}
+.closeIcon.fat::before, .closeIcon.fat::after {
+    border-radius: 100%;
+}

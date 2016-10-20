@@ -1,0 +1,36 @@
+{
+  "name": "app",
+  "version": "0.15.0",
+  "description": "app with React",
+  "scripts": {
+    "start": "webpack-dev-server --config webpack-dev-server.config.js --progress --inline --colors",
+    "build": "webpack --config webpack-production.config.js --progress --colors"
+  },
+  "private": true,
+  "devDependencies": {
+    "babel-core": "^6.3.26",
+    "babel-loader": "^6.2.4",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "clean-webpack-plugin": "*",
+    "css-loader": "*",
+    "extract-text-webpack-plugin": "*",
+    "file-loader": "*",
+    "html-webpack-plugin": "^2.7.2",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "react-hot-loader": "^1.3.0",
+    "style-loader": "*",
+    "transfer-webpack-plugin": "^0.1.4",
+    "url-loader": "*",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0",
+    "webpack-manifest-plugin": "^1.0.1"
+  },
+  "dependencies": {
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-tap-event-plugin": "^1.0.0"
+  }
+}

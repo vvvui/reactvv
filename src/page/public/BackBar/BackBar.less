@@ -1,0 +1,58 @@
+@s: 375rem;
+
+.backBar {
+    width: 100%;
+    height: 45/@s;
+    line-height: 47/@s;
+    text-align: center;
+    position: relative;
+    font-size: 18/@s;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #ffffff;
+    color: #333333;
+    .backIcon {
+        position: absolute;
+        left: 32/@s;
+        top: 50%;
+        margin-top: -15/@s;
+        cursor: pointer;
+        padding-top: 3/@s;
+    }
+    .hide {
+        display: none;
+    }
+}
+
+.rt180 {
+    transform: rotate(180deg) scale(1.2);
+    -webkit-transform: rotate(180deg) scale(1.2);
+}
+
+.backArrow {
+    width:20/@s;
+    height:18/@s;
+    position:absolute;
+    margin: 2/@s 0 0 -5/@s;
+    background-color: #ffffff;
+    right: 2/@s;
+}
+.backEm2, .backEm3 {
+    width:0px;
+    height:0px;
+    display:block;
+    position:absolute;
+    left:7px;
+    top:0px;
+    border-top:8/@s transparent dashed;
+    border-right:8/@s transparent dashed;
+    border-bottom:8/@s transparent dashed;
+    border-left:8/@s white solid;
+    overflow:hidden;
+}
+.backEm3 {
+    left:9px;
+    border-left:8/@s #666666 solid;
+}
+.backEm2 {
+    border-left:8/@s #ffffff solid;
+}
