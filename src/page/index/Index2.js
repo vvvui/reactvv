@@ -45,26 +45,14 @@ class Index2 extends Component {
                 <div onClick={this.showPop.bind(this)}>openWin</div>
                 <PopWindow
                     show={this.showWin}
-                    showClose={false}
-                    showBackBar={true}
+                    theme='alert'
                     backTitle="微众银行隐私政策"
-                    btnSwap={false}
-                    width="100%"
-                    height="100%"
-                    contentStyle={{
-                        borderRadius: '0'
-                    }}
-                    textAreaStyle={{
-                        textAlign: 'left',
-                        paddingLeft: 0,
-                        paddingRight: 0
-                    }}
                     closeCallback={function(){console.log(222)}}
                     clearCallback={function(){console.log(333)}}
                     confirmCallback={function(){console.log(444)}}
                 >
                     <VerticalScroll
-                        height={com.screenHeight - 75 * (com.screenWidth/remStandar)}
+                        height={com.screenHeight - 375 * (com.screenWidth/remStandar)}
                     >
                         <div className="agreementText" style={{textIndent: 0, textAlign: 'center', fontSize: 18/remStandar + 'rem'}}>
                             微众银行隐私政策

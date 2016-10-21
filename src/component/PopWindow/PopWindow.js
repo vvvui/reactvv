@@ -53,6 +53,71 @@ class PopWindow extends Component {
         this.PopWindow.parentNode.style.overflowY = 'auto';
     }
 
+    setTheme () {
+        this.theme = {};
+        var theme = this.theme;
+        switch (this.props.theme) {
+            case 'full':
+                theme.showBackBar = true;
+                theme.width = "100%";
+                theme.height = "100%";
+                theme.contentStyle = {
+                    borderRadius: '0'
+                };
+                theme.textAreaStyle = {
+                    textAlign: 'left',
+                    paddingLeft: 0,
+                    paddingRight: 0
+                };
+                break;
+            case 'toast':
+                theme.autoClose = 3000;
+                break;
+            case 'alert':
+                theme.title = '提示';
+                theme.showClose = true;
+                theme.confirmText = '确定';
+                break;
+            case 'confirm':
+                theme.title = '确认信息';
+                theme.clearText = '取消';
+                theme.confirmText = '确定';
+                theme.confirmStyle = {
+                    color: '#ff6600'
+                };
+                break;
+            default:
+                break;
+        }
+    }
+
+    setParam () {
+        this.setTheme();
+        this.param = {};
+        var param = this.param;
+        var props = this.props;
+        var theme = this.theme;
+        param.maskStyle = props.maskStyle || theme.maskStyle;
+        param.autoClose = props.autoClose || theme.autoClose;
+        param.width = props.width || theme.width;
+        param.height = props.height || theme.height;
+        param.contentStyle = props.contentStyle || theme.contentStyle;
+        param.showClose = props.showClose || theme.showClose;
+        param.closeStyle = props.closeStyle || theme.closeStyle;
+        param.title = props.title || theme.title;
+        param.titleStyle = props.titleStyle || theme.titleStyle;
+        param.textAreaStyle = props.textAreaStyle || theme.textAreaStyle;
+        param.confirmText = props.confirmText || theme.confirmText;
+        param.clearText = props.clearText || theme.clearText;
+        param.btnSwap = props.btnSwap || theme.btnSwap;
+        param.btnAreaStyle = props.btnAreaStyle || theme.btnAreaStyle;
+        param.clearStyle = props.clearStyle || theme.clearStyle;
+        param.confirmStyle = props.confirmStyle || theme.confirmStyle;
+        param.backBarStyle = props.backBarStyle || theme.backBarStyle;
+        param.showBackBar = props.showBackBar || theme.showBackBar;
+        param.backTitle = props.backTitle || theme.backTitle;
+    }
+
     styleInit () {
         if (!this.loaded) {
             return;
@@ -61,33 +126,35 @@ class PopWindow extends Component {
             this.hide();
             return;
         }
+        this.setParam();
+        var param = this.param || {};
         // popWindow
         this.PopWindow.style.display = 'block';
         var scrollTop = this.PopWindow.parentNode.scrollTop;
         this.PopWindow.parentNode.style.overflowY = 'hidden';
         this.PopWindow.style.top = scrollTop + 'px';
         // mask
-        var maskStyle = this.props.maskStyle;
+        var maskStyle = param.maskStyle;
         if (maskStyle && typeof maskStyle == 'object') {
             for (var i in maskStyle) {
                 this.popMask.style[i] = maskStyle[i];
             }
         }
         // autoClose
-        if (this.props.autoClose) {
+        if (param.autoClose) {
             setTimeout(function(){
                 this.close();
-            }.bind(this), this.props.autoClose);
+            }.bind(this), param.autoClose);
         }
         // content
         this.popContent.style.width = this.textArea.clientWidth + 'px';
-        if (this.props.width) {
-            this.popContent.style.width = this.props.width;
+        if (param.width) {
+            this.popContent.style.width = param.width;
         }
-        if (this.props.height) {
-            this.popContent.style.height = this.props.height;
+        if (param.height) {
+            this.popContent.style.height = param.height;
         }
-        var contentStyle = this.props.contentStyle;
+        var contentStyle = param.contentStyle;
         if (contentStyle && typeof contentStyle == 'object') {
             for (var i in contentStyle) {
                 this.popContent.style[i] = contentStyle[i];
@@ -95,10 +162,10 @@ class PopWindow extends Component {
         }
         // closeArea
         this.closeArea.style.display = 'none';
-        if (this.props.showClose) {
+        if (param.showClose) {
             this.closeArea.style.display = 'block';
         }
-        var closeStyle = this.props.closeStyle;
+        var closeStyle = param.closeStyle;
         if (closeStyle && typeof closeStyle == 'object') {
             for (var i in closeStyle) {
                 this.closeArea.style[i] = closeStyle[i];
@@ -106,17 +173,17 @@ class PopWindow extends Component {
         }
         // titleArea
         this.titleArea.style.display = 'none';
-        if (this.props.title) {
+        if (param.title) {
             this.titleArea.style.display = 'block';
             this.textArea.style.paddingTop = '0';
         }
-        var titleStyle = this.props.titleStyle;
+        var titleStyle = param.titleStyle;
         if (titleStyle && typeof titleStyle == 'object') {
             for (var i in titleStyle) {
                 this.titleArea.style[i] = titleStyle[i];
             }
         }
-        var textAreaStyle = this.props.textAreaStyle;
+        var textAreaStyle = param.textAreaStyle;
         if (textAreaStyle && typeof textAreaStyle == 'object') {
             for (var i in textAreaStyle) {
                 this.textArea.style[i] = textAreaStyle[i];
@@ -124,37 +191,37 @@ class PopWindow extends Component {
         }
         // btnArea
         this.btnArea.style.display = 'none';
-        if (this.props.clearText || this.props.confirmText) {
+        if (param.clearText || param.confirmText) {
             this.btnArea.style.display = 'block';
         }
-        if (this.props.clearText && this.props.confirmText) {
+        if (param.clearText && param.confirmText) {
             this.confirmBtn.style.width = '50%';
             this.clearBtn.style.width = '50%';
-            if (this.props.btnSwap) {
+            if (param.btnSwap) {
                 this.clearBtn.style.borderLeft = '1px solid #eeeeee';
             } else {
                 this.clearBtn.style.borderRight = '1px solid #eeeeee';
             }
         }
-        if (!this.props.clearText) {
+        if (!param.clearText) {
             this.clearBtn.style.display = 'none';
         }
-        if (!this.props.confirmText) {
+        if (!param.confirmText) {
             this.confirmBtn.style.display = 'none';
         }
-        var btnAreaStyle = this.props.btnAreaStyle;
+        var btnAreaStyle = param.btnAreaStyle;
         if (btnAreaStyle && typeof btnAreaStyle == 'object') {
             for (var i in btnAreaStyle) {
                 this.btnArea.style[i] = btnAreaStyle[i];
             }
         }
-        var clearStyle = this.props.clearStyle;
+        var clearStyle = param.clearStyle;
         if (clearStyle && typeof clearStyle == 'object') {
             for (var i in clearStyle) {
                 this.clearBtn.style[i] = clearStyle[i];
             }
         }
-        var confirmStyle = this.props.confirmStyle;
+        var confirmStyle = param.confirmStyle;
         if (confirmStyle && typeof confirmStyle == 'object') {
             for (var i in confirmStyle) {
                 this.confirmBtn.style[i] = confirmStyle[i];
@@ -162,10 +229,10 @@ class PopWindow extends Component {
         }
         // backBar
         this.backBarArea.style.display = 'none';
-        if (this.props.showBackBar) {
+        if (param.showBackBar) {
             this.backBarArea.style.display = 'block';
         }
-        var backBarStyle = this.props.backBarStyle;
+        var backBarStyle = param.backBarStyle;
         if (backBarStyle && typeof backBarStyle == 'object') {
             for (var i in backBarStyle) {
                 this.backBarArea.style[i] = backBarStyle[i];
@@ -179,7 +246,8 @@ class PopWindow extends Component {
     }
 
     getBtnArea () {
-        if (this.props.btnSwap) {
+        var param = this.param || {};
+        if (param.btnSwap) {
             return (
                 <div ref="btnArea" className="btnArea">
                     <div
@@ -187,14 +255,14 @@ class PopWindow extends Component {
                         className="btn"
                         onClick={this.confirm.bind(this)}
                     >
-                        {this.props.confirmText}
+                        {param.confirmText}
                     </div>
                     <div
                         ref="clearBtn"
                         className="btn"
                         onClick={this.clear.bind(this)}
                     >
-                        {this.props.clearText}
+                        {param.clearText}
                     </div>
                 </div>
             );
@@ -206,14 +274,14 @@ class PopWindow extends Component {
                     className="btn"
                     onClick={this.clear.bind(this)}
                 >
-                    {this.props.clearText}
+                    {param.clearText}
                 </div>
                 <div
                     ref="confirmBtn"
                     className="btn"
                     onClick={this.confirm.bind(this)}
                 >
-                    {this.props.confirmText}
+                    {param.confirmText}
                 </div>
             </div>
         );
@@ -225,6 +293,7 @@ class PopWindow extends Component {
 
     render() {
         this.styleInit();
+        var param = this.param || {};
         return (
             <div ref="PopWindow" className="PopWindow">
                 <div ref="popMask" className="popMask"></div>
@@ -236,7 +305,7 @@ class PopWindow extends Component {
                                 <i className="backEm2"></i>
                             </b>
                         </div>
-                        {this.props.backTitle}
+                        {param.backTitle}
                     </div>
                     <div ref="closeArea" className="closeArea">
                         <div
@@ -245,7 +314,7 @@ class PopWindow extends Component {
                         ></div>
                     </div>
                     <div ref="titleArea" className="titleArea">
-                        {this.props.title}
+                        {param.title}
                     </div>
                     <div ref="textArea" className="textArea">
                         {this.routeChildren}
