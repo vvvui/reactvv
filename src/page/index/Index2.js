@@ -45,7 +45,7 @@ class Index2 extends Component {
                 <div onClick={this.showPop.bind(this)}>openWin</div>
                 <PopWindow
                     show={this.showWin}
-                    theme='alert'
+                    theme='popWin'
                     backTitle="微众银行隐私政策"
                     closeCallback={function(){console.log(222)}}
                     clearCallback={function(){console.log(333)}}

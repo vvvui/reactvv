@@ -86,6 +86,13 @@ class PopWindow extends Component {
                     color: '#ff6600'
                 };
                 break;
+            case 'popWin':
+                theme.showClose = true;
+                theme.closeStyle = {
+                    position: 'relative',
+                    width: '100%'
+                };
+                break;
             default:
                 break;
         }
@@ -153,12 +160,6 @@ class PopWindow extends Component {
         }
         if (param.height) {
             this.popContent.style.height = param.height;
-        }
-        var contentStyle = param.contentStyle;
-        if (contentStyle && typeof contentStyle == 'object') {
-            for (var i in contentStyle) {
-                this.popContent.style[i] = contentStyle[i];
-            }
         }
         // closeArea
         this.closeArea.style.display = 'none';
@@ -243,6 +244,12 @@ class PopWindow extends Component {
         var contentHeight = this.popContent.clientHeight;
         this.popContent.style.marginLeft = -(contentWidth/2) + 'px';
         this.popContent.style.marginTop = -(contentHeight/2) + 'px';
+        var contentStyle = param.contentStyle;
+        if (contentStyle && typeof contentStyle == 'object') {
+            for (var i in contentStyle) {
+                this.popContent.style[i] = contentStyle[i];
+            }
+        }
     }
 
     getBtnArea () {
