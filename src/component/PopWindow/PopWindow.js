@@ -25,6 +25,17 @@ class PopWindow extends Component {
         this.clearBtn = this.refs.clearBtn;
         this.backBarArea = this.refs.backBarArea;
         this.styleInit ();
+        // orientationchange
+        window.addEventListener("orientationchange", function(e) {
+            if (this.closed) {
+                return;
+            }
+            setTimeout(function(){
+                this.setState({
+                    open: true
+                });
+            }.bind(this), 200);
+        }.bind(this), false);
     }
 
     close () {
@@ -49,6 +60,7 @@ class PopWindow extends Component {
     }
 
     hide () {
+        this.closed = true;
         this.PopWindow.style.display = 'none';
         this.PopWindow.parentNode.style.overflowY = 'auto';
     }
@@ -133,6 +145,7 @@ class PopWindow extends Component {
             this.hide();
             return;
         }
+        this.closed = false;
         this.setParam();
         var param = this.param || {};
         // popWindow
