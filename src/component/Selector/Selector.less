@@ -1,0 +1,39 @@
+@s: 375rem;
+
+.Selector {
+    width: 100%;
+    height: 120/@s;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    .SelectorMask {
+        position: absolute;
+        width: 100%;
+        height: 40/@s;
+        border-top: 1px solid #eeeeee;
+        border-bottom: 1px solid #eeeeee;
+        pointer-events: none;
+        left: 0;
+        top: 50%;
+        margin-top: -21/@s;
+        z-index: 1;
+    }
+    .SelectorArea {
+        width: 100%;
+        height: 100%;
+        padding-right: 50/@s;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+        .SelectorContent {
+            padding: 40/@s 0;
+            text-align: center;
+            li {
+                height: 40/@s;
+                line-height: 40/@s;
+                font-size: 14/@s;
+                color: #666666;
+            }
+        }
+    }
+}

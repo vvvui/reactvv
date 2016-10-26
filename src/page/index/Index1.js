@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import BackBar from '../public/BackBar/BackBar';
 import {HorizentalScroll, VerticalScroll} from '../../component/ScrollArea/ScrollArea';
+import Selector from '../../component/Selector/Selector';
 
 class Index1 extends Component {
 
@@ -19,7 +20,54 @@ class Index1 extends Component {
         this.props.changeRoute('?page=3');
     }
 
+    selectorCallback (id, data) {
+        //console.log(id);
+        //console.log(data);
+    }
+
     render() {
+        var selectorData = [
+            {
+                option: '北京',
+                value: 12
+            },
+            {
+                option: '上海',
+                value: 13
+            },
+            {
+                option: '广州',
+                value: 14
+            },
+            {
+                option: '深圳',
+                value: 15
+            },
+            {
+                option: '天津',
+                value: 16
+            },
+            {
+                option: '重庆',
+                value: 17
+            },
+            {
+                option: '成都',
+                value: 18
+            },
+            {
+                option: '杭州',
+                value: 19
+            },
+            {
+                option: '武汉',
+                value: 20
+            },
+            {
+                option: '南京',
+                value: 21
+            }
+        ];
         return (
             <div className="page">
                 <BackBar title="第1页"/>
@@ -36,6 +84,11 @@ class Index1 extends Component {
                         <li className="item">5</li>
                     </ul>
                 </HorizentalScroll>
+                <Selector
+                    data={selectorData}
+                    value={20}
+                    callback={this.selectorCallback.bind(this)}
+                />
                 <VerticalScroll
                     height={300}
                 >
