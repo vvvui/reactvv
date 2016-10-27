@@ -18,8 +18,8 @@ class Selector extends Component {
     }
 
     componentDidMount () {
+        this.loaded = true;
         var param = this.param;
-        this.param.items = document.getElementsByName('selectItem');
         this.scroll = this.refs.SelectorArea;
         this.scroll.addEventListener('touchstart', this.touchStart.bind(this));
         this.scroll.addEventListener('touchmove', this.touchMove.bind(this));
@@ -31,9 +31,10 @@ class Selector extends Component {
         if (this.props.value != undefined) {
             var value = this.props.value;
             for (var i in param.data) {
-                if (param.data[i].value == value) {
+                if (i == value) {
                     param.scrollId = i;
                     var moveY = param.scrollId * param.itemHeight;
+                    this.moveToInit = true;
                     this.moveTo(moveY);
                 }
             }
@@ -62,7 +63,7 @@ class Selector extends Component {
         }
         // vertical
         param.mY = event.pageY || event.y;
-        if (Math.abs( param.mY - param.sY ) >= 1) {
+        if (Math.abs( param.mY - param.sY ) >= 0) {
             param.isMove = 1;
         }
         param.sLastPosY = param.lastPosY;
@@ -78,6 +79,7 @@ class Selector extends Component {
         }
         param.moveLock = false;
         if (!param.isMove) {
+            this.actionFinish();
             return;
         }
         this.endTime = (new Date()).getTime();
@@ -117,7 +119,11 @@ class Selector extends Component {
     moveTo (moveY) {
         var sTop = this.scroll.scrollTop;
         var eTop = moveY;
-        var aData = com.vvGetAnimateData(sTop, eTop, 35);
+        var frame = 35;
+        if (sTop == eTop) {
+            frame = 1;
+        }
+        var aData = com.vvGetAnimateData(sTop, eTop, frame);
         this.aData = aData;
         this.acNum = 0;
         this.animateLock = false;
@@ -126,6 +132,7 @@ class Selector extends Component {
 
     doAnimate () {
         if (this.animateLock) {
+            this.moveToInit = false;
             return;
         }
         var aData = this.aData;
@@ -141,13 +148,19 @@ class Selector extends Component {
     actionFinish () {
         var param = this.param;
         this.setFinishStyle();
+        param.data[param.scrollId].level = this.props.level || 0;
         if (this.props.callback) {
+            if (this.moveToInit) {
+                this.moveToInit = false;
+                return;
+            }
             this.props.callback(param.scrollId, param.data[param.scrollId]);
         }
     }
 
     setFinishStyle () {
         var param = this.param;
+        param.items = this.refs.SelectorArea.childNodes[0].childNodes;
         var items = param.items;
         for (var i in param.data) {
             if (i == param.scrollId) {
@@ -174,12 +187,38 @@ class Selector extends Component {
         }.bind(this));
     }
 
+    renderInit () {
+        if (!this.loaded || this.props.level <= this.props.playLevel) {
+            return;
+        }
+        this.containerKey = Math.random();
+        var param = this.param;
+        this.refs.SelectorContent.innerHTML = '';
+        param.data = this.props.data;
+        var itmeNum = 0;
+        for (var i in param.data) {
+            param.data[i].key = itmeNum;
+            itmeNum ++;
+        }
+        param.data.map(function(item){
+            var li = document.createElement('li');
+            li.innerHTML = item.option;
+            li.setAttribute('id', item.key);
+            this.refs.SelectorContent.appendChild(li);
+        }.bind(this));
+        param.scrollId = this.props.value;
+        var moveY = param.scrollId * param.itemHeight;
+        this.moveToInit = true;
+        this.moveTo(moveY);
+    }
+
     render() {
+        this.renderInit();
         return (
             <div ref="Selector" className="Selector">
                 <div ref="SelectorMask" className="SelectorMask"></div>
                 <div ref="SelectorArea" className="SelectorArea">
-                    <ul ref="SelectorContent" className="SelectorContent">
+                    <ul key={this.containerKey} ref="SelectorContent" className="SelectorContent">
                         {this.getItemDom()}
                     </ul>
                 </div>
