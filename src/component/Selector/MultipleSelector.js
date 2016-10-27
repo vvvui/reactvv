@@ -3,7 +3,7 @@ require("./Selector.less");
 import React, {Component} from 'react';
 import Selector from './Selector';
 
-class MutipleSelector extends Component {
+class MultipleSelector extends Component {
 
     constructor(props, context) {
         super(props, context);
@@ -149,7 +149,7 @@ class MutipleSelector extends Component {
 
     render() {
         return (
-            <div ref="MutipleSelector" className="MutipleSelector">
+            <div ref="MultipleSelector" className="MultipleSelector">
                 <div className="titleArea">
                     <div className="rightBtn" onClick={this.finishAction.bind(this)}>完成</div>
                 </div>
@@ -162,4 +162,4 @@ class MutipleSelector extends Component {
 
 }
 
-export default MutipleSelector;
+export default MultipleSelector;

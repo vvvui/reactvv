@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import BackBar from '../public/BackBar/BackBar';
 import {HorizentalScroll, VerticalScroll} from '../../component/ScrollArea/ScrollArea';
 import Selector from '../../component/Selector/Selector';
-import MutipleSelector from '../../component/Selector/MutipleSelector';
+import MultipleSelector from '../../component/Selector/MultipleSelector';
 
 class Index1 extends Component {
 
@@ -165,7 +165,7 @@ class Index1 extends Component {
                         <li className="item">5</li>
                     </ul>
                 </HorizentalScroll>
-                <MutipleSelector
+                <MultipleSelector
                     data={mutipleSelectorData}
                     format={['省','市','区']}
                     resultFormat={['-','-','-']}
