@@ -26,6 +26,10 @@ class Index1 extends Component {
         //console.log(data);
     }
 
+    multipleCallback (data) {
+        console.log(data);
+    }
+
     render() {
         var selectorData = [
             {
@@ -166,6 +170,7 @@ class Index1 extends Component {
                     format={['省','市','区']}
                     resultFormat={['-','-','-']}
                     showTip={true}
+                    callback={this.multipleCallback.bind(this)}
                 />
                  <VerticalScroll
                      height={300}

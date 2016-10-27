@@ -138,10 +138,13 @@ class MutipleSelector extends Component {
                 valueResult += param.resultFormat[i];
             }
         }
-        console.log({
-            optionResult: optionResult,
-            valueResult: valueResult
-        });
+        if (this.props.callback) {
+            this.props.callback({
+                optionResult: optionResult,
+                valueResult: valueResult,
+                result: result
+            });
+        }
     }
 
     render() {
