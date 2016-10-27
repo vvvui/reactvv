@@ -216,7 +216,9 @@ class Selector extends Component {
         this.renderInit();
         return (
             <div ref="Selector" className="Selector">
-                <div ref="SelectorMask" className="SelectorMask"></div>
+                <div ref="SelectorMask" className="SelectorMask">
+                    <div className="tipText">{this.props.tipText}</div>
+                </div>
                 <div ref="SelectorArea" className="SelectorArea">
                     <ul key={this.containerKey} ref="SelectorContent" className="SelectorContent">
                         {this.getItemDom()}

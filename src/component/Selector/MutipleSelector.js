@@ -88,6 +88,9 @@ class MutipleSelector extends Component {
         var num = 0;
         for (var i in param.selectorData) {
             param.selectorData[i].key = num;
+            if (this.props.showTip) {
+                param.selectorData[i].tipText = param.format[num] || '';
+            }
             num ++;
         }
         var liStyle = {
@@ -104,6 +107,7 @@ class MutipleSelector extends Component {
                         playLevel={this.playLevel}
                         format={param.format}
                         resultFormat={param.resultFormat}
+                        tipText={item.tipText}
                     />
                 </li>
             );

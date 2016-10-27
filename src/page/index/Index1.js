@@ -165,6 +165,7 @@ class Index1 extends Component {
                     data={mutipleSelectorData}
                     format={['省','市','区']}
                     resultFormat={['-','-','-']}
+                    showTip={true}
                 />
                  <VerticalScroll
                      height={300}
