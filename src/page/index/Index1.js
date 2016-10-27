@@ -163,6 +163,8 @@ class Index1 extends Component {
                 </HorizentalScroll>
                 <MutipleSelector
                     data={mutipleSelectorData}
+                    format={['省','市','区']}
+                    resultFormat={['-','-','-']}
                 />
                  <VerticalScroll
                      height={300}

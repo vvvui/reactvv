@@ -13,7 +13,9 @@ class MutipleSelector extends Component {
         this.param = {
             data: this.props.data || {},
             selectorData: [],
-            resultData: []
+            resultData: [],
+            resultFormat: this.props.resultFormat || [],
+            format: this.props.format || []
         }
         this.playLevel = 0;
     }
@@ -100,6 +102,8 @@ class MutipleSelector extends Component {
                         callback={this.selectorCallback.bind(this)}
                         level={item.key}
                         playLevel={this.playLevel}
+                        format={param.format}
+                        resultFormat={param.resultFormat}
                     />
                 </li>
             );
@@ -111,9 +115,29 @@ class MutipleSelector extends Component {
         var param = this.param;
         for (var i in param.selectorData) {
             var data = param.selectorData[i].data[param.selectorData[i].value];
-            result.push(data);
+            result.push({
+                option: data.option,
+                value: data.value
+            });
         }
-        console.log(result);
+        var optionResult = '';
+        for (var i in result) {
+            optionResult += result[i].option;
+            if (param.format[i]) {
+                optionResult += param.format[i];
+            }
+        }
+        var valueResult = '';
+        for (var i in result) {
+            valueResult += result[i].value;
+            if (param.resultFormat[i]) {
+                valueResult += param.resultFormat[i];
+            }
+        }
+        console.log({
+            optionResult: optionResult,
+            valueResult: valueResult
+        });
     }
 
     render() {
