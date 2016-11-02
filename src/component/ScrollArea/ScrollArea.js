@@ -95,7 +95,11 @@ class VerticalScroll extends Component {
     moveTo (moveY) {
         var sTop = this.scroll.scrollTop;
         var eTop = moveY;
-        var aData = com.vvGetAnimateData(sTop, eTop, 35);
+        var speed = 35;
+        if (Math.abs(eTop - sTop) < 100) {
+            speed = 10;
+        }
+        var aData = com.vvGetAnimateData(sTop, eTop, speed);
         this.aData = aData;
         this.acNum = 0;
         this.animateLock = false;
@@ -232,7 +236,11 @@ class HorizentalScroll extends Component {
     moveTo (moveX) {
         var sLeft = this.scroll.scrollLeft;
         var eLeft = moveX;
-        var aData = com.vvGetAnimateData(sLeft, eLeft, 35);
+        var speed = 35;
+        if (Math.abs(eLeft - sLeft) < 100) {
+            speed = 10;
+        }
+        var aData = com.vvGetAnimateData(sLeft, eLeft, speed);
         this.aData = aData;
         this.acNum = 0;
         this.animateLock = false;
