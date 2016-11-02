@@ -138,7 +138,7 @@ class VerticalScrollPage extends Component {
     moveTo (moveY) {
         var sTop = this.scrollLi.scrollTop;
         var eTop = moveY;
-        var aData = com.vvGetAnimateData(sTop, eTop, 20);
+        var aData = com.vvGetAnimateData(sTop, eTop, 35);
         this.aData = aData;
         this.acNum = 0;
         this.animateLock = false;
