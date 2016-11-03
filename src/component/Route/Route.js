@@ -61,6 +61,7 @@ class Route extends Component {
         this.toPageData = toPageData;
         this.acNum = 0;
         this.pageInit();
+        this.aStartTime = (new Date().getTime());
         requestAnimationFrame(this.doAnimate.bind(this));
     }
 
@@ -70,9 +71,13 @@ class Route extends Component {
             this.showPage = this.toPage;
             return;
         }
-        this.refs['page' + this.showPage].style.left = this.showPageData[this.acNum] + 'px';
-        this.refs['page' + this.toPage].style.left = this.toPageData[this.acNum] + 'px';;
-        this.acNum ++;
+        var aEndTime = (new Date().getTime());
+        if (aEndTime - this.aStartTime > 30) {
+            this.refs['page' + this.showPage].style.left = this.showPageData[this.acNum] + 'px';
+            this.refs['page' + this.toPage].style.left = this.toPageData[this.acNum] + 'px';;
+            this.acNum ++;
+            this.aStartTime = aEndTime;
+        }
         requestAnimationFrame(this.doAnimate.bind(this));
     }
 
