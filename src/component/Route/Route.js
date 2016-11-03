@@ -1,3 +1,5 @@
+require("./Route.less");
+
 import React, {Component} from 'react';
 
 class Route extends Component {
@@ -11,8 +13,14 @@ class Route extends Component {
     }
 
     componentDidMount () {
+        this.leftSize = 100/3;
         this.loaded = true;
         this.parseRoute(com.locationSearch);
+        window.addEventListener("orientationchange", function(e) {
+            setTimeout(function(){
+                this.pageInit();
+            }.bind(this), 100);
+        }.bind(this), false);
     }
 
     getChildren () {
@@ -47,41 +55,8 @@ class Route extends Component {
 
     animateAction () {
         this.animating = true;
-        var showPage = this.showPage - 1;
-        var toPage = this.toPage - 1;
-        this.animateFrame = 15;
+        var toLeftSize = 45;
         this.derection = this.toPage > this.showPage ? 1 : -1;
-        var showPageStart = 0;
-        var showPageEnd = this.derection > 0 ? -this.derection * 100 : -this.derection * com.screenWidth;
-        var showPageData = com.vvGetAnimateData(showPageStart, showPageEnd, this.animateFrame);
-        var toPageStart = this.derection * com.screenWidth;
-        var toPageEnd = 0;
-        var toPageData = com.vvGetAnimateData(toPageStart, toPageEnd, this.animateFrame);
-        this.showPageData = showPageData;
-        this.toPageData = toPageData;
-        this.acNum = 0;
-        this.pageInit();
-        this.aStartTime = (new Date().getTime());
-        requestAnimationFrame(this.doAnimate.bind(this));
-    }
-
-    doAnimate () {
-        if (this.acNum >= this.showPageData.length) {
-            this.animating = false;
-            this.showPage = this.toPage;
-            return;
-        }
-        var aEndTime = (new Date().getTime());
-        if (aEndTime - this.aStartTime > 30) {
-            this.refs['page' + this.showPage].style.left = this.showPageData[this.acNum] + 'px';
-            this.refs['page' + this.toPage].style.left = this.toPageData[this.acNum] + 'px';;
-            this.acNum ++;
-            this.aStartTime = aEndTime;
-        }
-        requestAnimationFrame(this.doAnimate.bind(this));
-    }
-
-    pageInit () {
         for (var i = 0; i < this.routeChildren.length; i++) {
             var id = i + 1;
             var ref = 'page' + id;
@@ -91,10 +66,53 @@ class Route extends Component {
             }
             if (id == this.toPage) {
                 this.refs[ref].style.zIndex = 1;
-                this.refs[ref].style.left = this.derection ? '100%' : '-100%';
+                this.refs[ref].style.left = this.derection > 0 ? toLeftSize + '%' : '0%';
                 continue;
             }
-            this.refs[ref].style.left = '200%';
+            this.refs[ref].style.left = '100%';
+        }
+        this.animateFrame = 10;
+        var toPageStart = this.refs.wrapper.scrollLeft;
+        var toPageEnd;
+        if (this.derection > 0) {
+            toPageEnd = toPageStart + (45 - this.leftSize)/100 * com.screenWidth * 3;
+        } else {
+            toPageEnd = 0;
+        }
+        var toPageData = com.vvGetAnimateData(toPageStart, toPageEnd, this.animateFrame);
+        this.toPageData = toPageData;
+        this.acNum = 0;
+        this.aStartTime = (new Date().getTime());
+        requestAnimationFrame(this.doAnimate.bind(this));
+    }
+
+    doAnimate () {
+        if (this.acNum >= this.toPageData.length) {
+            this.animating = false;
+            this.showPage = this.toPage;
+            this.pageInit();
+            return;
+        }
+        var aEndTime = (new Date().getTime());
+        if (aEndTime - this.aStartTime > 30) {
+            this.refs.wrapper.scrollLeft = this.toPageData[this.acNum];
+            this.acNum ++;
+            this.aStartTime = aEndTime;
+        }
+        requestAnimationFrame(this.doAnimate.bind(this));
+    }
+
+    pageInit () {
+        this.refs.wrapper.scrollLeft = com.screenWidth;
+        var leftSize = this.leftSize;
+        for (var i = 0; i < this.routeChildren.length; i++) {
+            var id = i + 1;
+            var ref = 'page' + id;
+            if (id == this.showPage) {
+                this.refs[ref].style.left = leftSize + '%';
+                continue;
+            }
+            this.refs[ref].style.left = '100%';
         }
     }
 
@@ -112,7 +130,7 @@ class Route extends Component {
             childNum ++;
             var ref = 'page' + childNum;
             return (
-                <div ref={ref} key={childNum} className="page">
+                <div ref={ref} key={childNum} className="wrapperPage">
                     {item}
                 </div>
             );
@@ -124,7 +142,9 @@ class Route extends Component {
         this.showAnimateRoute();
         return (
             <div ref="wrapper" className="wrapper">
-                {this.showChildren()}
+                <div className="wrapperContent">
+                    {this.showChildren()}
+                </div>
             </div>
         );
     }

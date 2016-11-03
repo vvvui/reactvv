@@ -165,10 +165,10 @@ class Selector extends Component {
         for (var i in param.data) {
             if (i == param.scrollId) {
                 items[i].style.color = '#000000';
-                items[i].style.fontSize = '16px';
+                items[i].style.fontSize = 16/375 + 'rem';
             } else {
                 items[i].style.color = '#666666';
-                items[i].style.fontSize = '14px';
+                items[i].style.fontSize = 14/375 + 'rem';
             }
         }
     }
