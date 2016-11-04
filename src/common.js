@@ -14,7 +14,9 @@ class Common {
             height = document.getElementById('app').clientWidth * height/width;
             width = document.getElementById('app').clientWidth;
         }
-        width = width < remStandar ? remStandar : width;
+        if (navigator.userAgent.indexOf("UCBrowser") > 0) {
+            width = width < remStandar ? remStandar : width;
+        }
         this.screenWidth = width;
         this.screenHeight = document.getElementById('app').clientHeight;
         document.documentElement.style.fontSize = this.screenWidth + 'px';
