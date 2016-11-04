@@ -83,7 +83,7 @@ class Route extends Component {
         this.toPageData = toPageData;
         this.acNum = 0;
         //this.aStartTime = (new Date().getTime());
-        setTimeout(this.doAnimate.bind(this), 5);
+        setTimeout(this.doAnimate.bind(this), 3);
     }
 
     doAnimate () {
@@ -99,7 +99,7 @@ class Route extends Component {
             this.acNum ++;
             //this.aStartTime = aEndTime;
         //}
-        setTimeout(this.doAnimate.bind(this), 5);
+        setTimeout(this.doAnimate.bind(this), 3);
     }
 
     pageInit () {
