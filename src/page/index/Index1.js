@@ -3,6 +3,7 @@ import BackBar from '../public/BackBar/BackBar';
 import {HorizentalScroll, VerticalScroll} from '../../component/ScrollArea/ScrollArea';
 import Selector from '../../component/Selector/Selector';
 import MultipleSelector from '../../component/Selector/MultipleSelector';
+import WebankApplyMenu from './webank_apply_menu';
 
 class Index1 extends Component {
 
@@ -152,6 +153,11 @@ class Index1 extends Component {
         return (
              <div className="page">
                 <BackBar title="第1页"/>
+                 <WebankApplyMenu
+                     changeRoute={this.props.changeRoute}
+                     page={1}
+                     pageTotal={3}
+                 />
                 <div onClick={this.clickAction.bind(this)}>111111</div>
                 <HorizentalScroll
                     height={100}

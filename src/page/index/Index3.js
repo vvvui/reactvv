@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import BackBar from '../public/BackBar/BackBar';
 import {VerticalScrollPage} from '../../component/ScrollPage/ScrollPage';
+import WebankApplyMenu from './webank_apply_menu';
 
 class Index3 extends Component {
 
@@ -26,6 +27,11 @@ class Index3 extends Component {
                     title="第3页"
                     backPage={2}
                     changeRoute={this.props.changeRoute}
+                />
+                <WebankApplyMenu
+                    changeRoute={this.props.changeRoute}
+                    page={3}
+                    pageTotal={3}
                 />
                 <div onClick={this.clickAction.bind(this)}>33333</div>
                 <VerticalScrollPage

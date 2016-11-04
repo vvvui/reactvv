@@ -55,7 +55,7 @@ class Route extends Component {
 
     animateAction () {
         this.animating = true;
-        var toLeftSize = parseInt(130/100 * com.screenWidth);
+        var toLeftSize = parseInt(200/100 * com.screenWidth);
         this.derection = this.toPage > this.showPage ? 1 : -1;
         for (var i = 0; i < this.routeChildren.length; i++) {
             var id = i + 1;
@@ -71,7 +71,7 @@ class Route extends Component {
             }
             this.refs[ref].style.left = (com.screenWidth * 3) + 'px';
         }
-        this.animateFrame = 15;
+        this.animateFrame = 100;
         var toPageStart = this.refs.wrapper.scrollLeft;
         var toPageEnd;
         if (this.derection > 0) {
@@ -82,8 +82,8 @@ class Route extends Component {
         var toPageData = com.vvGetAnimateData(toPageStart, toPageEnd, this.animateFrame, com.vvTween.Circ.easeInOut);
         this.toPageData = toPageData;
         this.acNum = 0;
-        this.aStartTime = (new Date().getTime());
-        requestAnimationFrame(this.doAnimate.bind(this));
+        //this.aStartTime = (new Date().getTime());
+        setTimeout(this.doAnimate.bind(this), 5);
     }
 
     doAnimate () {
@@ -93,13 +93,13 @@ class Route extends Component {
             this.pageInit();
             return;
         }
-        var aEndTime = (new Date().getTime());
-        if (aEndTime - this.aStartTime > 0) {
+        //var aEndTime = (new Date().getTime());
+        //if (aEndTime - this.aStartTime > 0) {
             this.refs.wrapper.scrollLeft = this.toPageData[this.acNum];
             this.acNum ++;
-            this.aStartTime = aEndTime;
-        }
-        requestAnimationFrame(this.doAnimate.bind(this));
+            //this.aStartTime = aEndTime;
+        //}
+        setTimeout(this.doAnimate.bind(this), 5);
     }
 
     pageInit () {

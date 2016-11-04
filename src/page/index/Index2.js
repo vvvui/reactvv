@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import BackBar from '../public/BackBar/BackBar';
 import PopWindow from '../../component/PopWindow/PopWindow';
 import {HorizentalScroll, VerticalScroll} from '../../component/ScrollArea/ScrollArea';
+import WebankApplyMenu from './webank_apply_menu';
 
 class Index2 extends Component {
 
@@ -34,6 +35,11 @@ class Index2 extends Component {
                     title="第2页"
                     backPage={1}
                     changeRoute={this.props.changeRoute}
+                />
+                <WebankApplyMenu
+                    changeRoute={this.props.changeRoute}
+                    page={2}
+                    pageTotal={3}
                 />
                 <div onClick={this.showPop.bind(this)}>openWin</div>
                 <div

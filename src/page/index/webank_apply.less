@@ -1,0 +1,60 @@
+@s: 375rem;
+.WebankApplyMenu {
+    height: 80/@s;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    position: relative;
+    .circleArea {
+        position: absolute;
+        width: 100%;
+        z-index: 3;
+        .circleItem {
+            width: 100/3%;
+            position: absolute;
+            top: 15/@s;
+            .circle {
+                width: 30/@s;
+                height: 30/@s;
+                border-radius: 16/@s;
+                border: 1px solid #c2c2c2;
+                position: relative;
+                margin: 0px auto;
+                background-color: #ffffff;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 50% auto;
+            }
+            .circleCheck {
+                border: 1px solid #e54121;
+                background-color: #e54121;
+            }
+        }
+    }
+    .lineArea {
+        position: absolute;
+        height: 1px;
+        background-color: #c2c2c2;
+        width: 100%;
+        top: 31/@s;
+        .line {
+            position: absolute;
+            width: 50%;
+            height: 1px;
+            background-color: #e54121;
+        }
+    }
+    .textArea {
+        position: absolute;
+        top: 50/@s;
+        text-align: center;
+        width: 100%;
+        color: #c2c2c2;
+        line-height: 18/@s;
+        .text {
+            position: absolute;
+        }
+        .textCheck {
+            color: #e54121;
+        }
+    }
+}
