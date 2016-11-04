@@ -55,7 +55,7 @@ class Route extends Component {
 
     animateAction () {
         this.animating = true;
-        var toLeftSize = 45;
+        var toLeftSize = parseInt(130/100 * com.screenWidth);
         this.derection = this.toPage > this.showPage ? 1 : -1;
         for (var i = 0; i < this.routeChildren.length; i++) {
             var id = i + 1;
@@ -66,20 +66,20 @@ class Route extends Component {
             }
             if (id == this.toPage) {
                 this.refs[ref].style.zIndex = 1;
-                this.refs[ref].style.left = this.derection > 0 ? toLeftSize + '%' : '0%';
+                this.refs[ref].style.left = this.derection > 0 ? toLeftSize + 'px' : 0;
                 continue;
             }
-            this.refs[ref].style.left = '100%';
+            this.refs[ref].style.left = (com.screenWidth * 3) + 'px';
         }
-        this.animateFrame = 10;
+        this.animateFrame = 15;
         var toPageStart = this.refs.wrapper.scrollLeft;
         var toPageEnd;
         if (this.derection > 0) {
-            toPageEnd = toPageStart + (45 - this.leftSize)/100 * com.screenWidth * 3;
+            toPageEnd = toLeftSize;
         } else {
             toPageEnd = 0;
         }
-        var toPageData = com.vvGetAnimateData(toPageStart, toPageEnd, this.animateFrame);
+        var toPageData = com.vvGetAnimateData(toPageStart, toPageEnd, this.animateFrame, com.vvTween.Circ.easeInOut);
         this.toPageData = toPageData;
         this.acNum = 0;
         this.aStartTime = (new Date().getTime());
@@ -94,7 +94,7 @@ class Route extends Component {
             return;
         }
         var aEndTime = (new Date().getTime());
-        if (aEndTime - this.aStartTime > 30) {
+        if (aEndTime - this.aStartTime > 0) {
             this.refs.wrapper.scrollLeft = this.toPageData[this.acNum];
             this.acNum ++;
             this.aStartTime = aEndTime;
@@ -104,15 +104,15 @@ class Route extends Component {
 
     pageInit () {
         this.refs.wrapper.scrollLeft = com.screenWidth;
-        var leftSize = this.leftSize;
+        var leftSize = com.screenWidth;
         for (var i = 0; i < this.routeChildren.length; i++) {
             var id = i + 1;
             var ref = 'page' + id;
             if (id == this.showPage) {
-                this.refs[ref].style.left = leftSize + '%';
+                this.refs[ref].style.left = leftSize + 'px';
                 continue;
             }
-            this.refs[ref].style.left = '100%';
+            this.refs[ref].style.left = (com.screenWidth * 3) + 'px';
         }
     }
 

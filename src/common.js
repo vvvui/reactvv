@@ -14,10 +14,10 @@ class Common {
             height = document.getElementById('app').clientWidth * height/width;
             width = document.getElementById('app').clientWidth;
         }
+        width = width < remStandar ? remStandar : width;
         this.screenWidth = width;
         this.screenHeight = document.getElementById('app').clientHeight;
         document.documentElement.style.fontSize = this.screenWidth + 'px';
-
         // orientationchange
         window.addEventListener("orientationchange", function(e) {
             if (window.orientation == 90 || window.orientation == -90) {
@@ -402,8 +402,8 @@ class Common {
                 }
 
             }
-
         }
+        this.vvTween = vvTween;
     }
 
 }
