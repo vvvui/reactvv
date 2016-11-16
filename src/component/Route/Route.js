@@ -13,7 +13,6 @@ class Route extends Component {
     }
 
     componentDidMount () {
-        this.leftSize = 100/3;
         this.loaded = true;
         this.parseRoute(com.locationSearch);
         window.addEventListener("orientationchange", function(e) {
@@ -103,6 +102,9 @@ class Route extends Component {
     }
 
     pageInit () {
+        if (!this.routeChildren.length) {
+            return;
+        }
         this.refs.wrapper.scrollLeft = com.screenWidth;
         var leftSize = com.screenWidth;
         for (var i = 0; i < this.routeChildren.length; i++) {
@@ -123,7 +125,13 @@ class Route extends Component {
             );
         }
         if (!this.routeChildren.length) {
-            return this.routeChildren;
+            var childNum = 1;
+            var ref = 'page' + childNum;
+            return (
+                <div ref={ref} key={childNum} className="wrapperPage">
+                    {this.routeChildren}
+                </div>
+            );
         }
         var childNum = 0;
         return this.routeChildren.map(function(item) {

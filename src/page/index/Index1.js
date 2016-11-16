@@ -172,7 +172,7 @@ class Index1 extends Component {
                     </ul>
                 </HorizentalScroll>
                 <MultipleSelector
-                    data={mutipleSelectorData.data[1]}
+                    data={mutipleSelectorData}
                     format={['省','市','区']}
                     resultFormat={['-','-','-']}
                     showTip={true}
