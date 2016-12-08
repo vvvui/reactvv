@@ -90,6 +90,31 @@ class Common {
         }
     }
 
+    getCookie (name) {
+        var arr, reg = new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg)) {
+            return arr[2];
+        } else {
+            return false;
+        }
+    }
+
+    delCookie (name) {
+        var exp = new Date();
+        exp.setTime(exp.getTime() - 1);
+        var cval = this.getCookie(name);
+        if(cval) {
+            document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+        }
+    }
+
+    setCookie (name, value, time) {
+        var time = time || (1 * 24 * 60 * 60 * 1000);
+        var exp = new Date();
+        exp.setTime(exp.getTime() + time);
+        document.cookie = name + "=" + value + ";expires=" + exp.toGMTString();
+    }
+
     setAjax () {
         // ajax
         var ajax = function (param) {
